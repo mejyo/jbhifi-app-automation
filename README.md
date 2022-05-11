@@ -1,2 +1,2 @@
-# JB HI-FI App Automation
+# JB Hi-Fi App Automation
 
