@@ -5,56 +5,63 @@ using SeleniumExtras.PageObjects;
 
 namespace jbhifi_app_automation.Pages
 {
-
-    class AddingProduct
+    class AddProduct
     {
-        public AddingProduct()
+        public AddProduct()
         {
             PageFactory.InitElements(GlobalDefinitions.driver, this);
         }
 
         #region 
-       
-
+        //Element for Search Products
         [FindsBy(How = How.CssSelector, Using = "input[placeholder='Search products']")]
-        private IWebElement SearchTab { get; set; }
+        private IWebElement SearchProducts { get; set; }
 
+        //Element for Search Input
         [FindsBy(How = How.CssSelector, Using = "input[placeholder='Search products, brands…']")]
-        private IWebElement SearchBar { get; set; }
+        private IWebElement SearchInput { get; set; }
 
+        //Element for Search Button
         [FindsBy(How = How.CssSelector, Using = "button[title='Start Search']")]
         private IWebElement SearchButton { get; set; }
 
+        //Element for first item
         [FindsBy(How = How.CssSelector, Using = "a[id='product-link-552123'] h4[class='ais-hit--title product-tile__title']")]
         private IWebElement Item { get; set; }
 
-
-        [FindsBy(How = How.CssSelector, Using = ".Button-module_jbclBtn__HwYX1.Button-module_jbclBtn__primary__QQ-Lr.Button-module_jbclBtn__fullWidth__AlpoW.pdp-jss93")]
+        //Element for Add to cart
+        [FindsBy(How = How.CssSelector, Using = "div[class='pdp-jss15'] span:nth-child(2)")]
         private IWebElement AddToCart { get; set; }
 
+        //Element for My Cart
         [FindsBy(How = How.CssSelector, Using = "button[id='minicart-toggle'] span[class='desktop']")]
+        private IWebElement MyCart { get; set; }
+
+        //Element for View Cart
+        [FindsBy(How = How.CssSelector, Using = "button[name='cart'] span")]
         private IWebElement ViewCart { get; set; }
 
+        //Element for Profile name
         [FindsBy(How = How.CssSelector, Using = ".customer.customer-name")]
         private IWebElement ProfileName { get; set; }
-
-
         #endregion
-        internal void SelectProduct()
+
+        internal void AddProductSteps()
         {
+            Assert.AreEqual("Jyo", ProfileName.Text);
 
             GlobalDefinitions.WaitForElement(GlobalDefinitions.driver, By.CssSelector("input[placeholder='Search products']"), 10);
-            SearchTab.Click();
-            SearchBar.SendKeys("Computer");
+            SearchProducts.Click();
+            SearchInput.SendKeys("Computer");
             SearchButton.Click();
             Item.Click();
-            GlobalDefinitions.ImplicitWaitTime(20);
-
+            GlobalDefinitions.ImplicitWaitTime(10);
             AddToCart.Click();
+            GlobalDefinitions.ImplicitWaitTime(10);
+            MyCart.Click();
             ViewCart.Click();
-            GlobalDefinitions.ImplicitWaitTime(20);
 
-            Assert.AreEqual("Venky", ProfileName.Text);
+            Assert.Pass("Selected product is added to the Cart!");
         }
     }
 }

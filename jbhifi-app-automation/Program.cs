@@ -9,13 +9,11 @@ namespace jbhifi_app_automation
         [TestFixture]
         class User : Base
         {
-
             [Test, Order(1)]
-
-            public void SelectingProduct()
+            public void AddToCart()
             {
-                AddingProduct addingProductlObj = new AddingProduct();
-                addingProductlObj.SelectProduct();
+                AddProduct AddProductObj = new AddProduct();
+                AddProductObj.AddProductSteps();
             }
         }
     }
