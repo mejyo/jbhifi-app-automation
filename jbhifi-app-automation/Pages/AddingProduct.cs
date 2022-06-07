@@ -1,20 +1,16 @@
-﻿using MarsFramework.Global;
+﻿using jbhifi_app_automation.Global;
+using NUnit.Framework;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Interactions;
-using OpenQA.Selenium.Support.UI;
 using SeleniumExtras.PageObjects;
-using SeleniumExtras.WaitHelpers;
-using System;
-using System.Threading;
 
-namespace Target_Appliaction
+namespace jbhifi_app_automation.Pages
 {
 
     class AddingProduct
     {
         public AddingProduct()
         {
-            PageFactory.InitElements(MarsFramework.Global.GlobalDefinitions.driver, this);
+            PageFactory.InitElements(GlobalDefinitions.driver, this);
         }
 
         #region 
@@ -48,27 +44,17 @@ namespace Target_Appliaction
         {
 
             GlobalDefinitions.WaitForElement(GlobalDefinitions.driver, By.CssSelector("input[placeholder='Search products']"), 10);
-
             SearchTab.Click();
-            Thread.Sleep(2000);
             SearchBar.SendKeys("Computer");
-            Thread.Sleep(2000);
             SearchButton.Click();
-            Thread.Sleep(7000);
             Item.Click();
-            Thread.Sleep(2000);
-            //ItemSize.Click();
-            Thread.Sleep(2000);
+            GlobalDefinitions.ImplicitWaitTime(20);
+
             AddToCart.Click();
-            Thread.Sleep(7000);
             ViewCart.Click();
-            Thread.Sleep(2000);
+            GlobalDefinitions.ImplicitWaitTime(20);
 
-            String actualMessage = ProfileName.Text;
-            String expectedMessage = "Venky";
-
-
-            GlobalDefinitions.VerifySuccessfulMessage(expectedMessage, actualMessage, "Select Product");
+            Assert.AreEqual("Venky", ProfileName.Text);
         }
     }
 }

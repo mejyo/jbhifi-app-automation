@@ -1,24 +1,20 @@
-﻿using MarsFramework.Global;
+﻿using jbhifi_app_automation.Global;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Support.UI;
 using SeleniumExtras.PageObjects;
-using SeleniumExtras.WaitHelpers;
-using System;
-using System.Threading;
 
-namespace MarsFramework.Pages
+namespace jbhifi_app_automation.Pages
 
 {
-    class SignIn
+    class Login
     {
-        public SignIn()
+        public Login()
         {
-            PageFactory.InitElements(Global.GlobalDefinitions.driver, this);
+            PageFactory.InitElements(GlobalDefinitions.driver, this);
         }
 
 
         #region  Initialize Web Elements 
-        //Finding the Sign Icon
+        //Finding the Login Icon
         [FindsBy(How = How.CssSelector, Using = "button[id='myaccount-toggle'] span[class='desktop']")]
         private IWebElement MyAccount { get; set; }
 
@@ -33,34 +29,17 @@ namespace MarsFramework.Pages
         //Click on login button
         [FindsBy(How = How.Id, Using = "continueProxy")]
         private IWebElement LoginButton { get; set; }
-
-       /* [FindsBy(How = How.CssSelector, Using = ".Typography-module_jbclTyp__link__e95fz.Typography-module_jbclTyp__roboto__ioyYr")]
-        private IWebElement SkipButton { get; set; }*/
-
-
-
         #endregion
+
         internal void LoginSteps()
         {
             GlobalDefinitions.NavigateUrl();
-
-
-            Thread.Sleep(3000);
-
+            GlobalDefinitions.WaitForElement(GlobalDefinitions.driver, By.CssSelector("button[id='myaccount-toggle'] span[class='desktop']"), 10);
             MyAccount.Click();
-
-            Thread.Sleep(3000);
-
-            Email.SendKeys("jyothi.d1812@gmail.com");
-            Thread.Sleep(2000);
-            Password.SendKeys("Im@target6");
-            Thread.Sleep(2000);
+            Email.SendKeys("hi.its.venky@gmail.com");
+            Password.SendKeys("Im@jbhifi6");
+            GlobalDefinitions.ImplicitWaitTime(20);
             LoginButton.Click();
-            Thread.Sleep(9000);
-          //  SkipButton.Click();
-
-
-
         }
     }
 }
