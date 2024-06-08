@@ -11,7 +11,6 @@ namespace jbhifi_app_automation.Global
         public static IWebDriver driver { get; set; }
 
         #region WaitforElement 
-
         public static void ImplicitWaitTime(int time)
         {
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(time);
