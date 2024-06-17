@@ -14,7 +14,7 @@ namespace jbhifi_app_automation.Pages
 
         #region  Initialize Web Elements 
         //Element for My Account button
-        [FindsBy(How = How.CssSelector, Using = "button[id='myaccount-toggle'] span[class='desktop']")]
+        [FindsBy(How = How.CssSelector, Using = "div[id='header-account'] button[type='button']")]
         private IWebElement MyAccount { get; set; }
 
         //Element for Email Field
@@ -33,7 +33,7 @@ namespace jbhifi_app_automation.Pages
         internal void LoginSteps()
         {
             GlobalDefinitions.NavigateUrl();
-            GlobalDefinitions.WaitForElement(GlobalDefinitions.driver, By.CssSelector("button[id='myaccount-toggle'] span[class='desktop']"), 10);
+            GlobalDefinitions.WaitForElement(GlobalDefinitions.driver, By.CssSelector("div[id='header-account'] button[type='button']"), 10);
             MyAccount.Click();
             Email.SendKeys("hi.its.jyo123@gmail.com");
             Password.SendKeys("jbhifi@123");
